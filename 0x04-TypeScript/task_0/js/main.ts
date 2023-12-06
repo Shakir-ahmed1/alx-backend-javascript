@@ -4,24 +4,27 @@ interface Student {
   age: number;
   location: string;
 }
-const st1: Student = {firstName: 'Bob', lastName: 'Marley', age: 30, location 'USA'};
+const st1: Student = {firstName: 'Bob', lastName: 'Marley', age: 30, location: 'USA'};
 const st2: Student = {firstName: 'John', lastName: 'Smith', age: 22, location:'Canada'};
 const studentsList = [st1, st2];
 let table = document.createElement('table');
+
+// creating header
 let thead = document.createElement('thead');
 table.appendChild(thead);
-for (let key in studentsList) {
+for (let key of ['firstName', 'location']) {
   let th = document.createElement('th');
   th.textContent = key;
   thead.appendChild(th);
   }
 
+// creating body
 let tbody = document.createElement('tbody');
 table.appendChild(tbody);
 for (let i = 0; i < studentsList.length; i++) {
     let tr = document.createElement('tr');
     for (let key in studentsList[i]) {
-        if (key === 'firstName' || 'location') {
+        if (key === 'firstName' || key === 'location') {
           let td = document.createElement('td');
           td.textContent = studentsList[i][key];
 	  tr.appendChild(td);
