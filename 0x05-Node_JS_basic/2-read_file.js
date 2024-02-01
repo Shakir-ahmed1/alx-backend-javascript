@@ -12,7 +12,6 @@ function csv_to_list(csv) {
 
 function countStudents(path) {
         const cat = spawnSync('cat', [`${path}`]);
-        console.log(cat);
         if (cat.status === 0) {
         const data = cat.stdout
 		const datals = csv_to_list(data.toString());
