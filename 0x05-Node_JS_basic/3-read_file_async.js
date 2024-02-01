@@ -1,4 +1,7 @@
-const {spawnSync} = require('child_process');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
+// const {spawn} = require('child_process');
 function csv_to_list(csv) {
         const text = csv.trim();
         let list = text.split('\n');
@@ -10,11 +13,13 @@ function csv_to_list(csv) {
 		return newls;
 }
 
-function countStudents(path) {
-        const cat = spawnSync('cat', [`${path}`]);
+async function countStudents(path) {
+        // const cat = await exec('cat', [`${path}`]);
+        const {stdout, stderr} = await exec(`cat ${path}`);
 
-        if (!cat.error) {
-        const data = cat.stdout
+
+        if (!stderr) {
+        const data = stdout;
 		const datals = csv_to_list(data.toString());
         console.log(`Number of students: ${datals.length}`);
 		const fields = [];
@@ -39,6 +44,7 @@ function countStudents(path) {
 		}
 	} else {
         throw new Error('Cannot load the database');
+		
         }
 }
 module.exports = countStudents;
