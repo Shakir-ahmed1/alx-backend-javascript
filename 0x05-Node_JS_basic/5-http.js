@@ -1,4 +1,5 @@
 const http = require('http');
+
 const hostname = '127.0.0.1';
 const port = 1245;
 const util = require('util');
@@ -39,32 +40,30 @@ async function countStudents(path) {
       }
       result += `Number of students in ${a}: ${counter}. List: ${firstnames.join(', ')}\n`;
     }
-    return {stdout: result.trim(), stderr: stderr};
-
-  } else {
-    throw new Error('Cannot load the database');
+    return { stdout: result.trim(), stderr };
   }
+  return { stdout: 'Cannot load the database', stderr };
 }
 
 const app = http.createServer(async (req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    if (req.url === '/') {
-        res.write('Hello Holberton School!');
-    } else if (req.url === '/students') {
-        try {
-            const students = await countStudents(process.argv[2]);
-            res.write(`This is the list of our students\n${students.stdout}`);
-        } catch (e) {
-            console.log(e);
-        }
-    } else {
-        res.write("url not found");
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  if (req.url === '/') {
+    res.write('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    try {
+      const students = await countStudents(process.argv[2]);
+      res.write(`This is the list of our students\n${students.stdout}`);
+    } catch (e) {
+      console.log(e);
     }
+  } else {
+    res.write('url not found');
+  }
 
-    res.end();
+  res.end();
 });
 app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
-module.exports = app
+module.exports = app;
