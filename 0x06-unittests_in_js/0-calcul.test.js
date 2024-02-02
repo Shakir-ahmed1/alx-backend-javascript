@@ -20,4 +20,10 @@ describe('should return the sum of two rounded numbers', () => {
   it('testing for large numbers', () => {
     assert.equal(calculateNumber(10000.2, 129203.8), 139204);
   });
+  it('testing for negative numbers', () => {
+    assert.equal(calculateNumber(-4.2, -5.8), -10);
+  });
+  it('testing for 0', () => {
+    assert.equal(calculateNumber(0, 0), 0);
+  });
 });
