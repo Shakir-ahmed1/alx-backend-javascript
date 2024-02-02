@@ -6,7 +6,7 @@ function calculateNumber(type, a, b) {
   } else if (type === 'SUBTRACT') {
     return ra - rb;
   } else if (type === 'DIVIDE') {
-    if (b === 0) {
+    if (rb === 0) {
       return 'Error';
     } else {
       return ra / rb;
