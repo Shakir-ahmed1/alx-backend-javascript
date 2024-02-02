@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const calculateNumber = require('./2-calcul');
+const calculateNumber = require('./2-calcul_chai');
 
 function sub(a, b) {
   return Math.round(a) - Math.round(b);
