@@ -29,14 +29,15 @@ export default class StudentsController {
       }
       try {
         const database = await readDatabase('./database.csv');
+        const response = `List: ${database[major].join(', ')}`;
+        res.status(200).send(response);
       }
       catch (e) {
         throw new Error('Cannot load the database');
       }
 
       // Prepare the response
-      const response = `List: ${database[major].join(', ')}`;
-      res.status(200).send(response);
+
     } catch (error) {
       res.status(500).send(error.message);
     }
