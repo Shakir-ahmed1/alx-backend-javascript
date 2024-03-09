@@ -27,17 +27,18 @@ export default class StudentsController {
       if (major !== 'CS' && major !== 'SWE') {
         throw new Error('Major parameter must be CS or SWE');
       }
-
-      const database = await readDatabase('./database.csv');
-      if (!database) {
-        throw new Error('Database not available');
+      try {
+        const database = await readDatabase('./database.csv');
+      }
+      catch (e) {
+        throw new Error('Cannot load the database');
       }
 
       // Prepare the response
       const response = `List: ${database[major].join(', ')}`;
       res.status(200).send(response);
     } catch (error) {
-      res.status(500).send('Cannot load the database');
+      res.status(500).send(error.message);
     }
   }
 }
