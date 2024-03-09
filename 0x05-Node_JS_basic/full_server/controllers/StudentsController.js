@@ -34,7 +34,7 @@ export default class StudentsController {
       }
 
       // Prepare the response
-      const response = `List: ${database[major].join(', ')}\n`;
+      const response = `List: ${database[major].join(', ')}`;
       res.status(200).send(response);
     } catch (error) {
       res.status(500).send(error.message);
