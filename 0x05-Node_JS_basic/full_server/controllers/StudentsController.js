@@ -37,7 +37,6 @@ export default class StudentsController {
       const response = `List: ${database[major].join(', ')}`;
       res.status(200).send(response);
     } catch (error) {
-      res.status(500).send(error.message);
-    }
+      res.status(500).send('Cannot load the database');
   }
 }
